@@ -66,7 +66,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-semibold text-lg">Email</p>
-                <a href="mailto:info@tooeasymaintenance.com.au" className="text-primary-foreground/70 hover:text-primary transition-colors">info@tooeasymaintenance.com.au</a>
+                <a href="mailto:info@tooeasymaintenance.com.au" className="text-primary-foreground/70 hover:text-primary transition-colors">tooeasymaintenance1@gmail.com </a>
               </div>
             </div>
             <div className="flex items-center gap-4">
