@@ -57,7 +57,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-semibold text-lg">Call Us</p>
-                <a href="tel:0400000000" className="text-primary-foreground/70 hover:text-primary transition-colors">0400 000 000</a>
+                <a className="text-primary-foreground/70 hover:text-primary transition-colors" href="tel:0498815402">0498 815 402    </a>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -81,8 +81,8 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default ContactSection;
