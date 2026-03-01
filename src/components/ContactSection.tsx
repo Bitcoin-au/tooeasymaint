@@ -46,8 +46,8 @@ const ContactSection = () => {
               </SelectContent>
             </Select>
             <Textarea placeholder="Tell us about your project..." rows={4} className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-            <Button type="submit" size="lg" disabled={loading} className="w-full text-lg py-6">
-              {loading ? "Sending..." : "Send Message"}
+            <Button asChild size="lg" className="w-full text-lg py-6">
+              <a href="mailto:tooeasymaintenance@gmail.com">Send Message</a>
             </Button>
           </form>
           <div className="flex flex-col justify-center space-y-8">
