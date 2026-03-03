@@ -17,7 +17,7 @@ const testimonials = [
   {
     name: "Lisa & Tom P.",
     location: "Noosa",
-    quote: "Used Too Easy for a full bond clean and garden tidy-up. Our landlord was thrilled – we got our deposit back in full!",
+    quote: "Used Too Easy for a minor bond repair and garden tidy-up. Our landlord was thrilled – we got our deposit back in full!",
     initials: "LP",
   },
 ];
