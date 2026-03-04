@@ -5,19 +5,67 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Please enter a valid email address").max(255),
+  phone: z.string().max(20).optional(),
+  service: z.string().optional(),
+  message: z.string().trim().min(1, "Message is required").max(2000),
+});
 
 const ContactSection = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [service, setService] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrors({});
+
+    const form = e.target as HTMLFormElement;
+    const formData = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value || undefined,
+      service: service || undefined,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    const result = contactSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: result.data,
+      });
+
+      if (error) throw error;
+
       toast({ title: "Message sent!", description: "We'll get back to you within 24 hours." });
-      (e.target as HTMLFormElement).reset();
-    }, 1000);
+      form.reset();
+      setService("");
+    } catch (err) {
+      console.error("Send error:", err);
+      toast({
+        title: "Failed to send",
+        description: "Something went wrong. Please try again or call us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -31,10 +79,16 @@ const ContactSection = () => {
         </div>
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-5">
-            <Input placeholder="Your Name" required className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-            <Input type="email" placeholder="Email Address" required className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-            <Input type="tel" placeholder="Phone Number" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-            <Select>
+            <div>
+              <Input name="name" placeholder="Your Name" required className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+              {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
+            </div>
+            <div>
+              <Input name="email" type="email" placeholder="Email Address" required className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+              {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
+            </div>
+            <Input name="phone" type="tel" placeholder="Phone Number" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+            <Select value={service} onValueChange={setService}>
               <SelectTrigger className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground">
                 <SelectValue placeholder="Select a Service" />
               </SelectTrigger>
@@ -45,9 +99,12 @@ const ContactSection = () => {
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
-            <Textarea placeholder="Tell us about your project..." rows={4} className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-            <Button asChild size="lg" className="w-full text-lg py-6">
-              <a href="">Send Message</a>
+            <div>
+              <Textarea name="message" placeholder="Tell us about your project..." rows={4} required className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+              {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
+            </div>
+            <Button type="submit" size="lg" className="w-full text-lg py-6" disabled={loading}>
+              {loading ? "Sending..." : "Send Message"}
             </Button>
           </form>
           <div className="flex flex-col justify-center space-y-8">
@@ -57,7 +114,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-semibold text-lg">Call Us</p>
-                <a className="text-primary-foreground/70 hover:text-primary transition-colors" href="tel:0498815402">0498 815 402    </a>
+                <a className="text-primary-foreground/70 hover:text-primary transition-colors" href="tel:0498815402">0498 815 402</a>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -66,7 +123,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-semibold text-lg">Email</p>
-                <a href="mailto:info@tooeasymaintenance.com.au" className="text-primary-foreground/70 hover:text-primary transition-colors">tooeasymaintenance1@gmail.com </a>
+                <a href="mailto:tooeasymaintenance1@gmail.com" className="text-primary-foreground/70 hover:text-primary transition-colors">tooeasymaintenance1@gmail.com</a>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -81,8 +138,8 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 };
 
 export default ContactSection;
