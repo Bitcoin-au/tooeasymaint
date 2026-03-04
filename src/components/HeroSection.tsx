@@ -16,6 +16,10 @@ const HeroSection = () => {
         alt="Professional handyman mowing a lush green lawn on the Sunshine Coast"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
+        fetchPriority="high"
+        width={1410}
+        height={799}
+        decoding="async"
       />
       <div
         className="absolute inset-0"
