@@ -1,4 +1,3 @@
-import heroImage from "@/assets/hero-lawn.jpg";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -12,7 +11,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
       <img
-        src={heroImage}
+        src="/hero-lawn.jpg"
         alt="Professional handyman mowing a lush green lawn on the Sunshine Coast"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
