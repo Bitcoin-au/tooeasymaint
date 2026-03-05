@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Phone, Mail, MapPin, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -21,6 +22,7 @@ const ContactSection = () => {
   const [loading, setLoading] = useState(false);
   const [service, setService] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,9 +55,9 @@ const ContactSection = () => {
 
       if (error) throw error;
 
-      toast({ title: "Message sent!", description: "We'll get back to you within 24 hours." });
       form.reset();
       setService("");
+      setShowSuccess(true);
     } catch (err) {
       console.error("Send error:", err);
       toast({
@@ -69,6 +71,19 @@ const ContactSection = () => {
   };
 
   return (
+    <>
+    <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+      <DialogContent className="sm:max-w-md text-center">
+        <DialogHeader className="items-center">
+          <CheckCircle className="w-16 h-16 text-primary mb-2" />
+          <DialogTitle className="text-2xl">Message Sent!</DialogTitle>
+          <DialogDescription className="text-base">
+            Thank you for reaching out. We'll get back to you within 24 hours.
+          </DialogDescription>
+        </DialogHeader>
+        <Button onClick={() => setShowSuccess(false)} className="mt-4">Close</Button>
+      </DialogContent>
+    </Dialog>
     <section id="contact" className="py-20 bg-foreground text-primary-foreground">
       <div className="container mx-auto px-4">
         <div className="text-center mb-14">
@@ -139,6 +154,7 @@ const ContactSection = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
