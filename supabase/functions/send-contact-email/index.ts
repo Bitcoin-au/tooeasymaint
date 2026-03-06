@@ -44,7 +44,7 @@ serve(async (req) => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Contact Form <noreply@tooeasymaintenance.com.au>",
+        from: "Contact Form <noreply@tooeasymait.com.au>",
         to: ["tooeasymaintenance1@gmail.com"],
         subject: "New Message from Website Contact Form",
         html: htmlBody,
