@@ -88,8 +88,9 @@ const ContactSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Your Free Quote</h2>
-          <p className="text-primary-foreground/70 max-w-xl mx-auto">
-            Ready to get started? Fill out the form below or give us a call.
+          <p className="text-primary-foreground/70 max-w-2xl mx-auto">
+            Need help with mowing, painting, pressure washing, repairs, or general
+            property maintenance? Send through your details below or give us a call.
           </p>
         </div>
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -108,9 +109,10 @@ const ContactSection = () => {
                 <SelectValue placeholder="Select a Service" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="lawn">Lawn Mowing</SelectItem>
+                <SelectItem value="lawn-mowing">Lawn Mowing</SelectItem>
                 <SelectItem value="painting">Painting</SelectItem>
-                <SelectItem value="odd-jobs">Odd Jobs</SelectItem>
+                <SelectItem value="pressure-washing">Pressure Washing</SelectItem>
+                <SelectItem value="odd-jobs-maintenance">Odd Jobs & Maintenance</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
@@ -147,7 +149,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <p className="font-semibold text-lg">Serving</p>
-                <p className="text-primary-foreground/70">The Sunshine Coast Area, QLD</p>
+                <p className="text-primary-foreground/70">Sunshine Coast, QLD</p>
               </div>
             </div>
           </div>

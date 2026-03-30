@@ -1,23 +1,38 @@
-import { Shield, Clock, Heart } from "lucide-react";
+import { CheckCircle2, Clock3, Heart, Shield, Wrench } from "lucide-react";
+
+const highlights = [
+  { icon: Shield, label: "Fully Insured", desc: "Peace of mind on every job." },
+  { icon: Heart, label: "Family Owned", desc: "Friendly local service you can rely on." },
+  { icon: Clock3, label: "Experienced", desc: "Hands-on experience across a range of maintenance work." },
+];
+
+const serviceAreas = [
+  "Maroochydore",
+  "Mooloolaba",
+  "Buderim",
+  "Caloundra",
+  "Noosa",
+  "Nambour",
+  "Bli Bli",
+  "Kawana",
+];
 
 const AboutSection = () => {
   return (
-    <section className="py-20 bg-section-alt">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">About Too Easy Maintenance</h2>
-          <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
-            We're a family-owned business with over 10 years of experience keeping homes and
-            gardens in top shape across the Sunshine Coast. No job is too big or too small –
-            we treat every home like our own.
+    <section className="py-20 bg-background">
+      <div className="container mx-auto px-4 max-w-6xl space-y-16">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Why choose Too Easy Maintenance?</h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Too Easy Maintenance is a family-owned Sunshine Coast business focused on
+            practical, dependable work. Whether it’s a regular mowing job, a painting
+            refresh, pressure washing, or general property maintenance, the goal is simple:
+            make it easier to keep your home looking its best.
           </p>
         </div>
+
         <div className="grid sm:grid-cols-3 gap-8 text-center">
-          {[
-            { icon: Shield, label: "Fully Insured", desc: "Peace of mind on every job" },
-            { icon: Clock, label: "10+ Years", desc: "Experienced & dependable" },
-            { icon: Heart, label: "Family Owned", desc: "We care about your home" },
-          ].map((item) => (
+          {highlights.map((item) => (
             <div key={item.label} className="flex flex-col items-center">
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <item.icon className="w-7 h-7 text-primary" />
@@ -26,6 +41,48 @@ const AboutSection = () => {
               <p className="text-muted-foreground text-sm">{item.desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div className="rounded-2xl border bg-section-alt p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <Wrench className="w-6 h-6 text-primary" />
+              <h3 className="text-2xl font-bold">What we help with</h3>
+            </div>
+            <ul className="space-y-3 text-muted-foreground">
+              {[
+                "Lawn mowing and tidy-ups",
+                "Painting and touch-up work",
+                "Pressure washing and exterior clean-up",
+                "Bond repairs and minor repairs",
+                "Waste removal and general odd jobs",
+                "Deck restoration and property maintenance",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border bg-section-alt p-8 shadow-sm">
+            <h3 className="text-2xl font-bold mb-4">Proudly servicing the Sunshine Coast</h3>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              We service homes across the Sunshine Coast and surrounding suburbs. If you’re
+              unsure whether your area is covered, get in touch and ask for a quick quote.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {serviceAreas.map((area) => (
+                <div
+                  key={area}
+                  className="rounded-full bg-background border px-4 py-2 text-sm font-medium text-center"
+                >
+                  {area}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,8 +1,9 @@
-# Welcome to your Lovable project
+# Too Easy Maintenance website
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Lovable-exported marketing site for Too Easy Maintenance.
+Primary domain: https://tooeasymaint.com.au
 
 ## How can I edit this code?
 
