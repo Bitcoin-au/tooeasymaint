@@ -33,13 +33,6 @@ const AboutSection = () => {
           ))}
         </div>
 
-        <div className="rounded-2xl border bg-section-alt p-8 shadow-sm">
-          <h3 className="text-2xl font-bold mb-4">Proudly servicing the Sunshine Coast</h3>
-          <p className="text-muted-foreground mb-6 leading-relaxed">
-            We service homes across the Sunshine Coast and surrounding suburbs. If you're
-            unsure whether your area is covered, get in touch and ask for a quick quote.
-          </p>
-        </div>
       </div>
     </section>
   );
