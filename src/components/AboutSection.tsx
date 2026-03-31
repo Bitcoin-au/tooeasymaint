@@ -6,16 +6,6 @@ const highlights = [
   { icon: Clock3, label: "Experienced", desc: "Hands-on experience across a range of maintenance work." },
 ];
 
-const serviceAreas = [
-  "Maroochydore",
-  "Mooloolaba",
-  "Buderim",
-  "Caloundra",
-  "Noosa",
-  "Nambour",
-  "Bli Bli",
-  "Kawana",
-];
 
 const AboutSection = () => {
   return (
