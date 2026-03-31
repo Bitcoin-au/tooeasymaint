@@ -13,6 +13,7 @@ serve(async (req) => {
 
   try {
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+    const RESEND_FROM_EMAIL = Deno.env.get("RESEND_FROM_EMAIL") || "onboarding@resend.dev";
     if (!RESEND_API_KEY) {
       throw new Error("RESEND_API_KEY is not configured");
     }
@@ -44,7 +45,7 @@ serve(async (req) => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Too Easy Maintenance Contact Form <noreply@tooeasymaint.com.au>",
+        from: `Too Easy Maintenance Contact Form <${RESEND_FROM_EMAIL}>`,
         to: ["tooeasymaintenance1@gmail.com"],
         subject: "New Message from Website Contact Form",
         html: htmlBody,

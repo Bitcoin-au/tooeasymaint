@@ -6,7 +6,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Phone, Mail, MapPin, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -49,20 +48,32 @@ const ContactSection = () => {
 
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
-        body: result.data,
-      });
+      const response = await fetch(
+        "https://cajktkwgxaecsjhyuknp.supabase.co/functions/v1/send-contact-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(result.data),
+        }
+      );
 
-      if (error) throw error;
+      const payload = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(payload.error || "Failed to send message");
+      }
 
       form.reset();
       setService("");
       setShowSuccess(true);
     } catch (err) {
       console.error("Send error:", err);
+      const message = err instanceof Error ? err.message : "Something went wrong. Please try again or call us directly.";
       toast({
         title: "Failed to send",
-        description: "Something went wrong. Please try again or call us directly.",
+        description: `${message} If it keeps happening, please call 0498 815 402 or email tooeasymaintenance1@gmail.com.`,
         variant: "destructive",
       });
     } finally {
