@@ -72,16 +72,6 @@ const AboutSection = () => {
               We service homes across the Sunshine Coast and surrounding suburbs. If you’re
               unsure whether your area is covered, get in touch and ask for a quick quote.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {serviceAreas.map((area) => (
-                <div
-                  key={area}
-                  className="rounded-full bg-background border px-4 py-2 text-sm font-medium text-center"
-                >
-                  {area}
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
