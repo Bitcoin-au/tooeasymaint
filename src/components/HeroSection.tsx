@@ -37,8 +37,7 @@ const HeroSection = () => {
           style={{ animationDelay: "0.15s" }}
         >
           Too Easy Maintenance helps with lawn mowing, painting, pressure washing,
-          bond repairs, minor repairs, waste removal, deck restoration, and the odd
-          jobs that keep your home looking its best.
+          bond repairs, and the odd jobs that keep your home looking its best.
         </p>
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
