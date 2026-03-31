@@ -1,4 +1,4 @@
-import { CheckCircle2, Clock3, Heart, Shield, Wrench } from "lucide-react";
+import { Clock3, Heart, Shield } from "lucide-react";
 
 const highlights = [
   { icon: Shield, label: "Fully Insured", desc: "Peace of mind on every job." },
@@ -15,7 +15,7 @@ const AboutSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Why choose Too Easy Maintenance?</h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Too Easy Maintenance is a family-owned Sunshine Coast business focused on
-            practical, dependable work. Whether it’s a regular mowing job, a painting
+            practical, dependable work. Whether it's a regular mowing job, a painting
             refresh, pressure washing, or general property maintenance, the goal is simple:
             make it easier to keep your home looking its best.
           </p>
@@ -33,36 +33,12 @@ const AboutSection = () => {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
-          <div className="rounded-2xl border bg-section-alt p-8 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <Wrench className="w-6 h-6 text-primary" />
-              <h3 className="text-2xl font-bold">What we help with</h3>
-            </div>
-            <ul className="space-y-3 text-muted-foreground">
-              {[
-                "Lawn mowing and tidy-ups",
-                "Painting and touch-up work",
-                "Pressure washing and exterior clean-up",
-                "Bond repairs and minor repairs",
-                "Waste removal and general odd jobs",
-                "Deck restoration and property maintenance",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border bg-section-alt p-8 shadow-sm">
-            <h3 className="text-2xl font-bold mb-4">Proudly servicing the Sunshine Coast</h3>
-            <p className="text-muted-foreground mb-6 leading-relaxed">
-              We service homes across the Sunshine Coast and surrounding suburbs. If you’re
-              unsure whether your area is covered, get in touch and ask for a quick quote.
-            </p>
-          </div>
+        <div className="rounded-2xl border bg-section-alt p-8 shadow-sm">
+          <h3 className="text-2xl font-bold mb-4">Proudly servicing the Sunshine Coast</h3>
+          <p className="text-muted-foreground mb-6 leading-relaxed">
+            We service homes across the Sunshine Coast and surrounding suburbs. If you're
+            unsure whether your area is covered, get in touch and ask for a quick quote.
+          </p>
         </div>
       </div>
     </section>
