@@ -30,7 +30,7 @@ const HeroSection = () => {
           Family-owned • Fully insured • Sunshine Coast
         </p>
         <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6 leading-tight animate-fade-in-up lg:text-5xl">
-          Handyman, Lawn Mowing & Property Maintenance on the Sunshine Coast
+          Handyman and Property Maintenance on the Sunshine Coast
         </h1>
         <p
           className="text-lg md:text-xl text-primary-foreground/90 mb-8 font-sans animate-fade-in-up"
