@@ -12,7 +12,7 @@ const services = [
     icon: Paintbrush,
     title: "Painting",
     description:
-      "Interior and exterior painting, touch-ups, and refresh work to improve the look of your home.",
+      "Small interior and exterior painting, touch-ups, and refresh work to improve the look of your home.",
   },
   {
     icon: SprayCan,
