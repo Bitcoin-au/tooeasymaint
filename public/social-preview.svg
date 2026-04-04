@@ -16,9 +16,7 @@
   <text x="350" y="278" font-size="34" font-family="Arial, Helvetica, sans-serif" fill="#E5F4EA">and property maintenance across the Sunshine Coast</text>
   <rect x="80" y="392" width="320" height="72" rx="36" fill="#F2C14E"/>
   <text x="240" y="439" text-anchor="middle" font-size="32" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#0F172A">Family-owned</text>
-  <rect x="430" y="392" width="280" height="72" rx="36" fill="#ffffff" fill-opacity="0.16"/>
-  <text x="570" y="439" text-anchor="middle" font-size="32" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#ffffff">Fully insured</text>
-  <rect x="740" y="392" width="330" height="72" rx="36" fill="#ffffff" fill-opacity="0.16"/>
+  <rect x="430" y="392" width="330" height="72" rx="36" fill="#ffffff" fill-opacity="0.16"/>
   <text x="905" y="439" text-anchor="middle" font-size="32" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#ffffff">Sunshine Coast, QLD</text>
   <text x="82" y="545" font-size="44" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#ffffff">0498 815 402</text>
   <text x="455" y="545" font-size="28" font-family="Arial, Helvetica, sans-serif" fill="#E5F4EA">tooeasymaint.com.au</text>

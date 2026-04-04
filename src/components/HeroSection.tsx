@@ -27,7 +27,7 @@ const HeroSection = () => {
       />
       <div className="relative z-10 container mx-auto px-4 text-center max-w-4xl">
         <p className="text-xs sm:text-sm md:text-base uppercase tracking-[0.1em] sm:tracking-[0.2em] text-primary-foreground/80 mb-4 animate-fade-in-up">
-          Family-owned • Fully insured • Sunshine Coast
+          Family-owned • Sunshine Coast
         </p>
         <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6 leading-tight animate-fade-in-up lg:text-5xl">
           Handyman and Property Maintenance on the Sunshine Coast

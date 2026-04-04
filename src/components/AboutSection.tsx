@@ -1,7 +1,6 @@
-import { Clock3, Heart, Shield } from "lucide-react";
+import { Clock3, Heart } from "lucide-react";
 
 const highlights = [
-  { icon: Shield, label: "Fully Insured", desc: "Peace of mind on every job." },
   { icon: Heart, label: "Family Owned", desc: "Friendly local service you can rely on." },
   { icon: Clock3, label: "Experienced", desc: "Hands-on experience across a range of maintenance work." },
 ];
