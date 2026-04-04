@@ -1,4 +1,4 @@
-import { Clock3, Heart, Shield } from "lucide-react";
+import { Clock3, Heart } from "lucide-react";
 
 const highlights = [
   { icon: Heart, label: "Family Owned", desc: "Friendly local service you can rely on." },
