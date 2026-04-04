@@ -20,7 +20,7 @@ const AboutSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-8 text-center">
+        <div className="grid sm:grid-cols-2 gap-8 text-center max-w-2xl mx-auto">
           {highlights.map((item) => (
             <div key={item.label} className="flex flex-col items-center">
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4">
