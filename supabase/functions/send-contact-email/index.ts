@@ -13,7 +13,7 @@ serve(async (req) => {
 
   try {
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-    const RESEND_FROM_EMAIL = Deno.env.get("RESEND_FROM_EMAIL") || "onboarding@resend.dev";
+    const RESEND_FROM_EMAIL = "noreply@tooeasymaint.com.au";
     if (!RESEND_API_KEY) {
       throw new Error("RESEND_API_KEY is not configured");
     }
