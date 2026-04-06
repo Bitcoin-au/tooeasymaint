@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Phone, Mail, MapPin, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -17,10 +17,14 @@ const contactSchema = z.object({
   message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
+const getOptionalField = (value: FormDataEntryValue | null) => {
+  const parsed = typeof value === "string" ? value.trim() : "";
+  return parsed || undefined;
+};
+
 const ContactSection = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [service, setService] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -28,17 +32,18 @@ const ContactSection = () => {
     e.preventDefault();
     setErrors({});
 
-    const form = e.target as HTMLFormElement;
-    const formData = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value || undefined,
-      suburb: (form.elements.namedItem("suburb") as HTMLInputElement).value || undefined,
-      service: service || undefined,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    const form = e.currentTarget;
+    const submittedFormData = new FormData(form);
+    const payload = {
+      name: String(submittedFormData.get("name") ?? "").trim(),
+      email: String(submittedFormData.get("email") ?? "").trim(),
+      phone: getOptionalField(submittedFormData.get("phone")),
+      suburb: getOptionalField(submittedFormData.get("suburb")),
+      service: getOptionalField(submittedFormData.get("service")),
+      message: String(submittedFormData.get("message") ?? "").trim(),
     };
 
-    const result = contactSchema.safeParse(formData);
+    const result = contactSchema.safeParse(payload);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       result.error.errors.forEach((err) => {
@@ -50,26 +55,15 @@ const ContactSection = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://${import.meta.env.VITE_SUPABASE_PROJECT_ID}.supabase.co/functions/v1/send-contact-email`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          },
-          body: JSON.stringify(result.data),
-        }
-      );
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: result.data,
+      });
 
-      const payload = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(payload.error || "Failed to send message");
+      if (error) {
+        throw new Error(error.message || "Failed to send message");
       }
 
       form.reset();
-      setService("");
       setShowSuccess(true);
     } catch (err) {
       console.error("Send error:", err);
@@ -119,18 +113,20 @@ const ContactSection = () => {
             </div>
             <Input name="phone" type="tel" placeholder="Phone Number" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
             <Input name="suburb" placeholder="Suburb" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-            <Select value={service} onValueChange={setService}>
-              <SelectTrigger className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground">
-                <SelectValue placeholder="Select a Service" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="lawn-mowing">Lawn Mowing</SelectItem>
-                <SelectItem value="painting">Painting</SelectItem>
-                <SelectItem value="pressure-washing">Pressure Washing</SelectItem>
-                <SelectItem value="odd-jobs-maintenance">Odd Jobs & Maintenance</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-              </SelectContent>
-            </Select>
+            <select
+              name="service"
+              defaultValue=""
+              className="flex h-10 w-full rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2 text-sm text-primary-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              <option value="" disabled className="text-foreground">
+                Select a Service
+              </option>
+              <option value="lawn-mowing" className="text-foreground">Lawn Mowing</option>
+              <option value="painting" className="text-foreground">Painting</option>
+              <option value="pressure-washing" className="text-foreground">Pressure Washing</option>
+              <option value="odd-jobs-maintenance" className="text-foreground">Odd Jobs &amp; Maintenance</option>
+              <option value="other" className="text-foreground">Other</option>
+            </select>
             <div>
               <Textarea name="message" placeholder="Tell us about your project..." rows={4} required className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
               {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
