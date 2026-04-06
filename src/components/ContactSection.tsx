@@ -49,7 +49,7 @@ const ContactSection = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://cajktkwgxaecsjhyuknp.supabase.co/functions/v1/send-contact-email",
+        `https://${import.meta.env.VITE_SUPABASE_PROJECT_ID}.supabase.co/functions/v1/send-contact-email`,
         {
           method: "POST",
           headers: {
