@@ -33,17 +33,17 @@ const ContactSection = () => {
     setErrors({});
 
     const form = e.currentTarget;
-    const formData = new FormData(form);
-    const formData = {
-      name: String(formData.get("name") ?? "").trim(),
-      email: String(formData.get("email") ?? "").trim(),
-      phone: getOptionalField(formData.get("phone")),
-      suburb: getOptionalField(formData.get("suburb")),
-      service: getOptionalField(formData.get("service")),
-      message: String(formData.get("message") ?? "").trim(),
+    const submittedFormData = new FormData(form);
+    const payload = {
+      name: String(submittedFormData.get("name") ?? "").trim(),
+      email: String(submittedFormData.get("email") ?? "").trim(),
+      phone: getOptionalField(submittedFormData.get("phone")),
+      suburb: getOptionalField(submittedFormData.get("suburb")),
+      service: getOptionalField(submittedFormData.get("service")),
+      message: String(submittedFormData.get("message") ?? "").trim(),
     };
 
-    const result = contactSchema.safeParse(formData);
+    const result = contactSchema.safeParse(payload);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       result.error.errors.forEach((err) => {
