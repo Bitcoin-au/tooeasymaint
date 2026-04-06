@@ -14,7 +14,7 @@ const HeroSection = () => {
       <img
         src="/hero-lawn.jpg?v=11"
         alt="Too Easy Maintenance providing outdoor property maintenance on the Sunshine Coast"
-        className="absolute inset-0 w-full h-full object-cover object-[center_90%]"
+        className="absolute inset-0 w-full h-full object-cover object-[center_90%] md:object-[center_75%]"
         loading="eager"
         fetchPriority="high"
         width={1410}
