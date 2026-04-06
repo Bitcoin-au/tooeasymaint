@@ -12,6 +12,7 @@ const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Please enter a valid email address").max(255),
   phone: z.string().max(20).optional(),
+  suburb: z.string().trim().max(100).optional(),
   service: z.string().optional(),
   message: z.string().trim().min(1, "Message is required").max(2000),
 });
@@ -32,6 +33,7 @@ const ContactSection = () => {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       phone: (form.elements.namedItem("phone") as HTMLInputElement).value || undefined,
+      suburb: (form.elements.namedItem("suburb") as HTMLInputElement).value || undefined,
       service: service || undefined,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
     };
@@ -116,6 +118,7 @@ const ContactSection = () => {
               {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
             </div>
             <Input name="phone" type="tel" placeholder="Phone Number" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+            <Input name="suburb" placeholder="Suburb" className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50" />
             <Select value={service} onValueChange={setService}>
               <SelectTrigger className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground">
                 <SelectValue placeholder="Select a Service" />
