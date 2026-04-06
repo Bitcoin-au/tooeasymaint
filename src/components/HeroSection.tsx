@@ -12,7 +12,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-0">
       <img
-        src="/hero-lawn.jpg?v=9"
+        src="/hero-lawn.jpg?v=10"
         alt="Too Easy Maintenance providing outdoor property maintenance on the Sunshine Coast"
         className="absolute inset-0 w-full h-full object-cover object-[center_85%]"
         loading="eager"
