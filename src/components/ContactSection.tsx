@@ -86,7 +86,7 @@ const ContactSection = () => {
           <CheckCircle className="w-16 h-16 text-primary mb-2" />
           <DialogTitle className="text-2xl">Message Sent!</DialogTitle>
           <DialogDescription className="text-base">
-            Thank you for reaching out. We'll get back to you within 24 hours.
+            Thank you for reaching out. We'll get back to you shortly.
           </DialogDescription>
         </DialogHeader>
         <Button onClick={() => setShowSuccess(false)} className="mt-4">Close</Button>
